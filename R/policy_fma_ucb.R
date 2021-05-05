@@ -1,13 +1,19 @@
-#' R6 Class representing the Upper Confidence Bound policy
+#' R6 Class representing the Finitely Many Arm Upper Confidence Bound policy
 #'
-#' @description An UCBPolicy object is instantiated using exploration
-#'   parameter alpha. The method run is used to process a matrix containing the
-#'   arms rewards.
+#' @description An \code{\link{UCBPolicy}} object is instantiated using
+#'   exploration parameter alpha. The method \code{\link{run}} processes a
+#'   reward matrix corresponding to a stochastic with finitely many arms bandit.
 #'
 #' @details The Upper Confidence Bound Algorithm is used in stochastic bandits
 #'   with finitely many arms problems. Like other bandit algorithms, arms are
 #'   chosen according to their indices computed at each round. Here this index
 #'   is the upper confidence bound parameterized by the constant alpha.
+#'
+#'   When processing a bandit problem,iterations parameters mu_hat, N and K are
+#'   first reset then updated at each iteration corresponding to the reward
+#'   observed.
+#'
+#'   This class uses a \code{\link{Recorder}} object to export results.
 #' @export
 UCBPolicy <- R6::R6Class(
   public = list(
@@ -28,8 +34,8 @@ UCBPolicy <- R6::R6Class(
     #' @field N Numeric vector containing number of times each arm was pulled.
     N = NULL,
 
-    #' @field K Integer containing the number of arms
-    K = NULL, # number of arms
+    #' @field K Integer containing the number of arms.
+    K = NULL,
 
 
     #' @description
@@ -94,8 +100,8 @@ UCBPolicy <- R6::R6Class(
     #' @description Process a bandit problem represented by the reward matrix.
     #' @param rewards Reward matrix. Time on rows, arms on columns.
     #' @param verbose Logical. if FALSE, only action and reward history will be
-    #'   returned. Default is TRUE
-    #' @return A tribble describing at each iteration, the UCB value and reward
+    #'   returned. Default is TRUE.
+    #' @return A tibble describing at each iteration, the UCB value and reward
     #'   expectation of each arm, the action taken and the reward received. If
     #'   verbose is FALSE, only the action and reward.
     run = function(rewards, verbose=TRUE){

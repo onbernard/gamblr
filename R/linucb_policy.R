@@ -72,7 +72,6 @@ LINUCBPolicy <- R6::R6Class(
     },
 
     run = function(dt, rewards){
-      # TODO : change function to handle NA
       self$reset()
 
       dimensions <- dim(dt)

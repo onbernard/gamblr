@@ -2,17 +2,23 @@
 % Please edit documentation in R/policy_fma_ucb.R
 \name{UCBPolicy}
 \alias{UCBPolicy}
-\title{R6 Class representing the Upper Confidence Bound policy}
+\title{R6 Class representing the Finitely Many Arm Upper Confidence Bound policy}
 \description{
-An UCBPolicy object is instantiated using exploration
-  parameter alpha. The method run is used to process a matrix containing the
-  arms rewards.
+An \code{\link{UCBPolicy}} object is instantiated using
+  exploration parameter alpha. The method \code{\link{run}} processes a
+  reward matrix corresponding to a stochastic with finitely many arms bandit.
 }
 \details{
 The Upper Confidence Bound Algorithm is used in stochastic bandits
   with finitely many arms problems. Like other bandit algorithms, arms are
   chosen according to their indices computed at each round. Here this index
   is the upper confidence bound parameterized by the constant alpha.
+
+  When processing a bandit problem,iterations parameters mu_hat, N and K are
+  first reset then updated at each iteration corresponding to the reward
+  observed.
+
+  This class uses a \code{\link{Recorder}} object to export results.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -28,7 +34,7 @@ results.}
 
 \item{\code{N}}{Numeric vector containing number of times each arm was pulled.}
 
-\item{\code{K}}{Integer containing the number of arms}
+\item{\code{K}}{Integer containing the number of arms.}
 }
 \if{html}{\out{</div>}}
 }
@@ -157,12 +163,12 @@ Process a bandit problem represented by the reward matrix.
 \item{\code{rewards}}{Reward matrix. Time on rows, arms on columns.}
 
 \item{\code{verbose}}{Logical. if FALSE, only action and reward history will be
-returned. Default is TRUE}
+returned. Default is TRUE.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A tribble describing at each iteration, the UCB value and reward
+A tibble describing at each iteration, the UCB value and reward
   expectation of each arm, the action taken and the reward received. If
   verbose is FALSE, only the action and reward.
 }

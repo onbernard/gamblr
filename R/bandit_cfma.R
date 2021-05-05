@@ -1,21 +1,25 @@
-ContextualBandit <- R6::R6Class(
+#' R6 Class representing a contextual bandit with finitely many actions.
+#'
+#' @description A \code{\link{ContextFMABandit}} object
+#'
+#' @details A FMABandit object is instantiated
+#'
+#'   Policies can be simulated against the arms using
+#'
+#'   Plot of cumulative regret can be generated using \code{\link{plot_regret}}
+#' @export
+ContextFMABandit <- R6::R6Class(
   public = list(
-    K = NULL,
 
-    # TODO : regret
-    arms = NULL,
-    best_arm = NULL,
-    means = NULL,
-    best_mean = NULL,
+    dim = NULL,
+    K  = NULL, # dimensions[1]  arms on rows
+    dim = NULL, # dimensions[2] # dimensions on columns
+    horizon = NULL,  # dimensions[3] # dataPoints on depth
 
 
     policies = NULL,
 
-    initialize = function(){
-      # TODO : run cheks
-      # 1 : list arms cannot be empty
-      # 2 : arms have to be binary
-      # 3 : arms have to be of equal dataPoints ? Brainstorm error handling
+    initialize = function(horizon, dt, rewards){
       self$K <- 0
       self$arms <- list()
       self$policies <- list()

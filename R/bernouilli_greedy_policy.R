@@ -1,1 +1,0 @@
-# see thompson sampling tutorial
