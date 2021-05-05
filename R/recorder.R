@@ -27,7 +27,9 @@ Recorder <- R6::R6Class(
 
     publish = function(t,columns){
       self$history$t <- 1:t
-      bind_cols(self$history[eval(c("t",columns))])
+      pub <- bind_cols(self$history[eval(c("t",columns))])
+      pub$t <- as_factor(pub$t)
+      return(pub)
     }
   )
 )

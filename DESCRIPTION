@@ -15,5 +15,7 @@ Config/testthat/edition: 3
 Imports:
     R6,
     magrittr,
-    tibble,
-    MASS
+    tidyverse,
+    MASS,
+    ggplot2
+RoxygenNote: 7.1.1

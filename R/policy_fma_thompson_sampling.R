@@ -1,3 +1,13 @@
+#' R6 Class representing the Upper Confidence Bound policy
+#'
+#' @description An UCBPolicy object is instantiated using exploration
+#'   parameter alpha. The method run is used to process a matrix containing the
+#'   arms rewards.
+#'
+#' @details The Upper Confidence Bound Algorithm is used in stochastic bandits
+#'   with finitely many arms problems. Like other bandit algorithms, arms are
+#'   chosen according to their indices computed at each round. Here this index
+#'   is the upper confidence bound parameterized by the constant alpha.
 ThompsonSamplingPolicy <- R6::R6Class(
   #inherit = binaryPolicy || bernouilli bandit ???
   public = list(
@@ -50,17 +60,20 @@ ThompsonSamplingPolicy <- R6::R6Class(
       invisible(self)
     },
 
-    run = function(arms, nDataPoints){
+    run = function(rewards, verbose=TRUE){
       # TODO : change function to handle NA
-      self$reset(length(arms))
+      K <- ncol(rewards)
+      nDataPoints <- nrow(rewards)
+      self$reset(K)
 
       for(t in 1:nDataPoints){
         self$record$vector("mu_hat", self$get_mean_of_all_arms())
         a <- self$get_action()
-        r <- arms[[a]]$get_reward(t)
+        r <- rewards[t,a]
         self$update_with_reward(r,a)
       }
-      self$record$publish(nDataPoints,c("action","reward","mu_hat"))
+      pub <- self$record$publish(nDataPoints,c("action","reward","mu_hat"))
+      return(pub)
     }
   )
 )
