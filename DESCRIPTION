@@ -18,5 +18,5 @@ Imports:
     tidyverse,
     MASS,
     ggplot2,
-    Rfast
+    rlang
 RoxygenNote: 7.1.1
