@@ -133,7 +133,7 @@ UCBPolicy <- R6::R6Class(
       else{
         pub <- self$record$publish(nDataPoints,c("action","reward"))
       }
-      pub$action <- as_factor(pub$action)
+      pub$action <- as.factor(pub$action)
       return(pub)
     }
 

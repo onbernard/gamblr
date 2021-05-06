@@ -35,7 +35,6 @@ FMABandit <- R6::R6Class(
     #' @param horizon Number of time steps. Determines height of reward matrix.
     #' @return A new `FMABandit` object.
     initialize = function(horizon=1000L){
-      stopifnot(is_integer(horizon))
       self$K <- 0
       self$horizon <- horizon
       invisible(self)

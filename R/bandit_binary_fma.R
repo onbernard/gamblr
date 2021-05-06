@@ -29,8 +29,7 @@ BinaryFMABandit <- R6::R6Class(
     #' @return A new `BinaryFMABandit` object.
     initialize = function(horizon, arms_means){
       super$initialize(horizon)
-      stopifnot(is_integer(horizon),
-                is.numeric(arms_means))
+      stopifnot(is.numeric(arms_means))
 
       self$arms_means <- arms_means
       self$horizon <- horizon
