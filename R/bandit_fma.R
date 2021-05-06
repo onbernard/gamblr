@@ -106,8 +106,8 @@ FMABandit <- R6::R6Class(
       cumulative_reward <- cumsum(result$reward)
 
       cumulative_regret <- best_mean * 1:self$horizon - cumulative_reward
-      df <- tibble(t=1:self$horizon)
-      df <- bind_cols(df, "cumulative_regret"=cumulative_regret)
+      df <- dplyr::tibble(t=1:self$horizon)
+      df <- dplyr::bind_cols(df, "cumulative_regret"=cumulative_regret)
       ggplot(data=df, aes(x=t, y=cumulative_regret)) +
         geom_step() +
         xlab("time step") +
