@@ -18,4 +18,5 @@ Imports:
     tidyverse,
     MASS,
     ggplot2,
+    dplyr
 RoxygenNote: 7.1.1
