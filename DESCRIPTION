@@ -17,5 +17,6 @@ Imports:
     magrittr,
     tidyverse,
     MASS,
-    ggplot2
+    ggplot2,
+    Rfast
 RoxygenNote: 7.1.1
